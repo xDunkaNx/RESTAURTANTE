@@ -43,7 +43,6 @@ class AuthContoller extends Controller
             'token_type' => 'Bearer'
         ]);
     }
-    //
     public function infoUser (Request $request)
     {
         return $request->user();
