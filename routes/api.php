@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthContoller;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DishController;
 use App\Http\Controllers\FeatureController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,4 +27,11 @@ Route::post('/login',[AuthContoller::class, 'login']);
 Route::post('/infoUser',[AuthContoller::class, 'infoUser'])->middleware('auth:sanctum');
 
 Route::post('/createOrUpdateCategory',[CategoryController::class, 'createOrUpdateCategory']);
+Route::get('/getCategory',[CategoryController::class, 'getCategory']);
+Route::get('/getCategoryName',[CategoryController::class, 'getCategoryName']);
+
 Route::post('/createOrUpdateFeature',[FeatureController::class, 'createOrUpdateFeature']);
+Route::post('/getFeatureName',[FeatureController::class, 'getFeatureName']);
+
+Route::get('/getDish',[DishController::class, 'getDish']); 
+Route::get('/getCategoryName',[DishController::class, 'getCategoryName']);

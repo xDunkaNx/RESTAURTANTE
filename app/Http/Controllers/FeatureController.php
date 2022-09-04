@@ -24,7 +24,9 @@ class FeatureController extends Controller
         }
 
     }
-    function getFeature (Request $request)  {
-      //se necesita buscar por nombre de Feature  
+    function getFeatureName (Request $request)  {
+      //se necesita buscar por nombre de Feature
+      $value = $request["featureName"];
+      return Feature::where("categoryName", 'like', '%'.$value.'%')->get(); 
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -24,8 +25,14 @@ class CategoryController extends Controller
         }
 
     }
-    function getCategory (Request $request)  {
-      //se necesita buscar por nombre de categoria  
+    function getCategory ()  {
+      $allCategory = Category::get();
+      return $allCategory;
+    }
+
+    function getCategoryName (Request $request) {
+        $value = $request["categoryName"];
+        return Category::where("categoryName", 'like', '%'.$value.'%')->get();
     }
 
 }
