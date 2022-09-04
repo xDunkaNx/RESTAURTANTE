@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthContoller;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::post("Auth/register",[AuthContoller::class, 'register'])->name('Auth.register');
 Route::post('/login',[AuthContoller::class, 'login']);
 Route::post('/infoUser',[AuthContoller::class, 'infoUser'])->middleware('auth:sanctum');
+
+Route::post('/createOrUpdateCategory',[CategoryController::class, 'createOrUpdateCategory']);
