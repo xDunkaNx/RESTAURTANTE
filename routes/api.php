@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthContoller;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FeatureController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,4 @@ Route::post('/login',[AuthContoller::class, 'login']);
 Route::post('/infoUser',[AuthContoller::class, 'infoUser'])->middleware('auth:sanctum');
 
 Route::post('/createOrUpdateCategory',[CategoryController::class, 'createOrUpdateCategory']);
+Route::post('/createOrUpdateFeature',[FeatureController::class, 'createOrUpdateFeature']);

@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->id();
-            $table->string("nameFeature");
+            $table->string("featureName");
+            $table->boolean("isActive")->default(true);
+            $table->boolean("status")->default(true);
             $table->timestamps();
         });
     }
