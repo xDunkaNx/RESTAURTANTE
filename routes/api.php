@@ -34,9 +34,6 @@ Route::get('/getCategoryName',[CategoryController::class, 'getCategoryName']);
 Route::post('/createOrUpdateFeature',[FeatureController::class, 'createOrUpdateFeature']);
 Route::post('/getFeatureName',[FeatureController::class, 'getFeatureName']);
 
-Route::get('/getDish',[DishController::class, 'getDish']); 
-Route::get('/getCategoryName',[DishController::class, 'getCategoryName']); 
-
 Route::post('/createOrUpdateProduct',[ProductController::class, 'createOrUpdateProduct']);
 Route::get('/getProduct',[ProductController::class, 'getProduct']);
 Route::delete('/deleteProduct',[ProductController::class, 'deleteProduct']);
