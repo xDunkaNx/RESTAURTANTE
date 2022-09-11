@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("shortName");
+            $table->string("cityName");
+            $table->string("cityShortName");
             $table->string("latitude")->nullable();
             $table->string("longitude")->nullable();
             $table->boolean("main")->default(false);

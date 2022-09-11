@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('idClient')->nullable();
             $table->string("code");
-            $table->string("name");
+            $table->string("couponName");
             $table->date("startDate");
             $table->date("endDate");
             $table->boolean("main")->default(false);

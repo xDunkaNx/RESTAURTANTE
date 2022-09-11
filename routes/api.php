@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthContoller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,4 +35,8 @@ Route::post('/createOrUpdateFeature',[FeatureController::class, 'createOrUpdateF
 Route::post('/getFeatureName',[FeatureController::class, 'getFeatureName']);
 
 Route::get('/getDish',[DishController::class, 'getDish']); 
-Route::get('/getCategoryName',[DishController::class, 'getCategoryName']);
+Route::get('/getCategoryName',[DishController::class, 'getCategoryName']); 
+
+Route::post('/createOrUpdateProduct',[ProductController::class, 'createOrUpdateProduct']);
+Route::get('/getProduct',[ProductController::class, 'getProduct']);
+Route::delete('/deleteProduct',[ProductController::class, 'deleteProduct']);

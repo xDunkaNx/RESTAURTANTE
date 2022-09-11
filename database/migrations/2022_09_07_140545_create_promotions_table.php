@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("shortName");
+            $table->string("promotionName");
+            $table->string("promotionShortName");
             $table->string("description")->nullable();
             $table->boolean("isActive")->default(false);
             $table->boolean("status")->default(false);

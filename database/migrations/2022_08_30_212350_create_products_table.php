@@ -18,8 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('idCategory');
             $table->enum('group', ['COMIDA', 'BEBIDA','POSTRE' ]);
             $table->string("code");
-            $table->string("name");
-            $table->string("shortName");
+            $table->string("productName");
+            $table->string("productShortName");
             $table->string("description");
             $table->string("whitPresentation")->nullable();
             $table->boolean("isCombo")->default(false);

@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('idOffice');
-            $table->string("name");
-            $table->string("shortName");
+            $table->string("tableName");
+            $table->string("tableShortName");
             $table->string("numberFlat");
             $table->string("occupied");
             $table->boolean("isActive")->default(true);

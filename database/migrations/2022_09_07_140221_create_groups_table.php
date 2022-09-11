@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("shortName");
+            $table->string("groupName");
+            $table->string("groupShortName");
             $table->string("description")->nullable();
             $table->boolean("isActive")->default(true);
             $table->boolean("status")->default(true);

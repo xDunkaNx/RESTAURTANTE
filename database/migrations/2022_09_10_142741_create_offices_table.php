@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('idCity');
             $table->unsignedBigInteger('idManager');
-            $table->string("name");
+            $table->string("officeName");
             $table->string("address");
             $table->string("phone")->nullable();
             $table->string("cellPhone");

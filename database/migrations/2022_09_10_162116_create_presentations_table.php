@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('idProduct');
             $table->string('code');
-            $table->string("name");
-            $table->string("shortName");
+            $table->string("presentationName");
+            $table->string("presentationShortName");
             $table->string("description");
             $table->float("precio");
             $table->boolean("isActive")->default(false);

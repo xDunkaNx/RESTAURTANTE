@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("middleName");
-            $table->string("lastName");
+            $table->string("personName");
+            $table->string("personMiddleName");
+            $table->string("personLastName");
             $table->boolean("status")->default(false);
             $table->enum('typeDocument', ['DNI', 'PASAPORTE','CARNET' ]);
             $table->string("document");
