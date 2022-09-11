@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class CashBoxController extends Controller
 {
+  //comentario cashbox
     function getAllCashBox ()  {
       $allCategory = CashBox::get();
       return $allCategory;
