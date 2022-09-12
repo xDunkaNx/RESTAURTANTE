@@ -11,7 +11,7 @@ class ProductController extends Controller
     function createOrUpdateProduct (Request $request) {
         try {
             $validatedData = $request->validate([
-                'idCategory' => 'required|string|max:255',
+                'idCategory' => 'required|numeric',
                 'productName' => 'required|string|max:255',
                 'productShortName' => 'required|string|max:255',
                 'whitPresentation' => 'required|string|max:255',
@@ -63,8 +63,12 @@ class ProductController extends Controller
 
     }
     function getProduct ()  {
-      $allproduct = Product::get();
-      return $allproduct;
+        try {
+            $allproduct = Product::get();
+            return $allproduct;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     function deleteProduct (Request $request) {

@@ -10,4 +10,7 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    const STATUS_TRUE = true;
+    const IS_ACTIVE = true;
+    const STATUS_FALSE = false;
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,40 +12,87 @@ class AuthContoller extends Controller
 {
     public function register(Request $request)
     {
-         //var_dump("prueba");die;
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6', //123456
-        ]);
-        $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password'])
-        ]);
-        $token = $user->createToken('auth_token')->plainTextToken;
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer'
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'idGroup' => 'required|numeric',
+                'userName' => 'required|string|max:255',
+                'password' => 'required|string|min:6', //123456
+                'password' => 'required|confirmed', //se valida confirmacion de pass el campo enviado seria password_confirmation
+            ]);
+            $group = Group::select('*')
+            ->where('groups.id', $validatedData["idGroup"])
+            ->first();
+        if ($group["id"] == null) {
+            return response()->json([
+                'status' => SELF::STATUS_FALSE,
+                'msg' => "el ID del grupo no existe"
+            ]);
+        }
+            if ($group["isActive"] == SELF::STATUS_FALSE || $group["status"] == SELF::STATUS_FALSE) {
+                return response()->json([
+                    'status' => SELF::STATUS_FALSE,
+                    'msg' => "El grupo de usuario que intenta registrar se encuentra desactivado",
+                ]);
+            }
+            $user = User::create([
+                'idGroup' => $group["id"],
+                'userName' => $validatedData['userName'],
+                'password' => Hash::make($validatedData['password'])
+            ]);
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json([
+                'status' => SELF::STATUS_TRUE,
+                'msg' => "Registro de usuario exitoso",
+                'access_token' => $token,
+                'token_type' => 'Bearer'
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
     public function login(Request $request)
     {
-        if (!Auth::attempt($request->only('email','password'))) {
-           return response()->json([
-                'message' => 'invalid login details'
-           ],401);
+        try {
+            if (!Auth::attempt($request->only('userName','password'))) {
+               return response()->json([
+                    'message' => 'Usuario o contraseña incorrectos'
+               ],401);
+            }
+                $user = User::where('userName',$request['userName'])->firstOrFail();
+                $token = $user->createToken('auth_token')->plainTextToken;
+    
+                return response()->json([
+                    'status' => SELF::STATUS_TRUE,
+                    'msg' => "Usuario logueado correctamente",
+                    'access_token' => $token,
+                    'token_type' => 'Bearer'
+                ]);
+        } catch (\Throwable $th) {
+            throw $th;
         }
-        $user = User::where('email',$request['email'])->firstOrFail();
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer'
-        ]);
     }
-    public function infoUser (Request $request)
+    public function infoUser ()
     {
-        return $request->user();
+        try {
+            return response()->json([
+                'status' => SELF::STATUS_TRUE,
+                'msg' => "Acerca del perfil de usuario",
+                'data' => auth()->user(),
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+    public function logOut ()
+    {
+        try {
+            auth()->user()->tokens()->delete();
+            return response()->json([
+                'status' => SELF::STATUS_TRUE,
+                'msg' => "Se cerro la sesion correctamente",
+            ]);
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 }

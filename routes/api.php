@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\AuthContoller;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DishController;
 use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  Route::post('/register',[AuthContoller::class, 'register']);
 // Route::post("Auth/register",[AuthContoller::class, 'register'])->name('Auth.register');
 Route::post('/login',[AuthContoller::class, 'login']);
-Route::post('/infoUser',[AuthContoller::class, 'infoUser'])->middleware('auth:sanctum');
+Route::get('/infoUser',[AuthContoller::class, 'infoUser'])->middleware('auth:sanctum');
+Route::get('/logOut',[AuthContoller::class, 'logOut'])->middleware('auth:sanctum');
+
+Route::post('/createOrUpdategroup',[GroupController::class, 'createOrUpdategroup']);
 
 Route::post('/createOrUpdateCategory',[CategoryController::class, 'createOrUpdateCategory']);
 Route::get('/getCategory',[CategoryController::class, 'getCategory']);
